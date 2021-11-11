@@ -5,6 +5,8 @@ import Banner from './../Banner/Banner';
 import Navigation from './../../Shared/Navigation/Navigation';
 import MainMenu from './../../Shared/Navigation/MainMenu';
 import HotDeal from '../HotDeal/HotDeal';
+import AllTestimonials from '../AllTestimonials/AllTestimonials';
+// import Testimonial from './../Testimonial/Testimonial';
 
 const Home = () => {
   return (
@@ -14,6 +16,8 @@ const Home = () => {
       <Banner></Banner>
       <Services></Services>
       <HotDeal></HotDeal>
+      <AllTestimonials></AllTestimonials>
+      {/* <Testimonial></Testimonial> */}
       {/* <AppointmentBanner></AppointmentBanner> */}
     </div>
   );

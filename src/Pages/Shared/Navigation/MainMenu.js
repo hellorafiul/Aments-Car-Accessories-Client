@@ -20,6 +20,8 @@ import { Link } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import useAuth from '../../../hooks/useAuth';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 import './Navigation.css'
 
 const Search = styled('div')(({ theme }) => ({
@@ -64,6 +66,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function MainMenu() {
   const { user, logout } = useAuth();
+  console.log(user)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -104,6 +107,7 @@ export default function MainMenu() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      <MenuItem onClick={handleMenuClose}>{user?.email && <p>Howdy, {user.displayName}!</p>}</MenuItem>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={logout} >{
@@ -153,7 +157,11 @@ export default function MainMenu() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          {
+            user?.email ? <Stack direction="row" spacing={2}>
+              <Avatar alt="" src={user?.photoURL} />
+            </Stack> : <AccountCircle />
+          }
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -195,7 +203,11 @@ export default function MainMenu() {
                 onClick={handleProfileMenuOpen}
                 color="inherit"
               >
-                <AccountCircle />
+                {
+                  user?.email ? <Stack direction="row" spacing={2}>
+                    <Avatar alt="" src={user?.photoURL} />
+                  </Stack> : <AccountCircle />
+                }
               </IconButton>
             </Box>
             <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

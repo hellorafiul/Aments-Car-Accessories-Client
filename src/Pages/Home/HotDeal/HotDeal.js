@@ -9,7 +9,7 @@ import './HotDeal.css'
 
 const HotDeal = () => {
   return (
-    <Container sx={{ mb: 20 }}>
+    <Container sx={{ mb: 15 }}>
       <Typography sx={{ fontFamily: 'Raleway', fontWeight: "700", pb: 0, float: "left" }} variant="h3" gutterBottom component="div">
         <span style={{ borderBottom: '3px solid red', fontStyle: 'italic' }}>Pop</span>ular Categories
       </Typography>

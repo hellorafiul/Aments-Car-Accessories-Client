@@ -15,6 +15,7 @@ import PrivateRoute from './Pages/Login/PrivateRoute/PrivateRoute';
 import MainMenu from "./Pages/Shared/Navigation/MainMenu";
 import Services from './Pages/Home/Services/Services';
 import Footer from './Pages/Shared/Footer/Footer';
+import HotDeal from "./Pages/Home/HotDeal/HotDeal";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="/shop">
               <MainMenu></MainMenu>
               <Services />
+              <HotDeal></HotDeal>
               <Footer></Footer>
             </Route>
             <Route path="/home">

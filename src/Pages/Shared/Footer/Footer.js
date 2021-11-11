@@ -69,14 +69,14 @@ const Footer = () => {
             </Grid>
           </Grid>
         </Box>
-        <Box sx={{ flexGrow: 1 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <Typography className="author">Powered by <Link to="//www.facebook.com/heyrafiul/" target="_blank">Md. Rafiul Alam</Link></Typography>
-            </Grid>
-          </Grid>
-        </Box>
       </Container>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography className="author" sx={{ background: "#66666617", padding: "10px", borderBottom: '3px solid #ddd' }}>Powered by <Link to="//www.facebook.com/heyrafiul/" target="_blank">Md. Rafiul Alam</Link></Typography>
+          </Grid>
+        </Grid>
+      </Box>
     </Box>
   );
 };
