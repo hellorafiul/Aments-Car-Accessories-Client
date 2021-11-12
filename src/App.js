@@ -17,6 +17,7 @@ import Services from './Pages/Home/Services/Services';
 import Footer from './Pages/Shared/Footer/Footer';
 import HotDeal from "./Pages/Home/HotDeal/HotDeal";
 import Purchase from './Pages/Purchase/Purchase';
+import Dashboard from "./Pages/Dashboard/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -33,12 +34,16 @@ function App() {
               <HotDeal></HotDeal>
               <Footer></Footer>
             </Route>
-            <Route path="/shop/:id">
+            <PrivateRoute path="/shop/:id">
               <MainMenu></MainMenu>
               <Purchase></Purchase>
               <HotDeal></HotDeal>
               <Footer></Footer>
-            </Route>
+            </PrivateRoute>
+            <PrivateRoute path="/dashboard">
+              <Dashboard></Dashboard>
+              <Footer></Footer>
+            </PrivateRoute>
             <Route path="/home">
               <Home />
               <Footer></Footer>

@@ -13,6 +13,7 @@ const Service = (props) => {
   const history = useHistory()
   const handleDetails = (key) => {
     const uri = `/shop/${key}`
+    console.log(uri)
     history.push(uri)
   }
   return (
@@ -38,7 +39,7 @@ const Service = (props) => {
           <Typography variant="h5" component="div" sx={{ mb: 2 }}>
             <span style={{ color: 'red' }}>$</span>{price}
           </Typography>
-          <Box style={{ textDecoration: 'none' }} onClick={() => handleDetails(id)}><Button sx={{ color: 'red' }} variant="text">Shop Now</Button></Box>
+          <Box style={{ textDecoration: 'none' }} onClick={() => handleDetails(id)}><Button sx={{ color: 'red' }} variant="text">View Details</Button></Box>
         </Box>
       </Card>
     </Grid>

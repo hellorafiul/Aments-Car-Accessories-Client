@@ -1,0 +1,22 @@
+.reviews {
+padding-top: 30px;
+width: 100%;
+}
+.reviews input{
+padding: 10px;
+margin: 0 auto;
+display: block;
+width: 50%;
+border: 1px solid #ddd;
+margin-top: 10px;
+border-radius: 5px;
+}
+.reviews textarea{
+padding: 50px 10px;
+display: block;
+width: 50%;
+margin: 0 auto;
+border: 1px solid #ddd;
+margin-top: 10px;
+
+}

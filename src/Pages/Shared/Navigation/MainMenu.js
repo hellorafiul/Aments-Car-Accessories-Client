@@ -146,7 +146,7 @@ export default function MainMenu() {
       </MenuItem>
       <MenuItem>
         <IconButton>
-          <Link style={{ textDecoration: 'none', color: "black", }} to="/appointment">Dashboard</Link>
+          {user.email && <Link style={{ textDecoration: 'none', color: "black", }} to="/dashboard">Dashboard</Link>}
         </IconButton>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
@@ -192,7 +192,7 @@ export default function MainMenu() {
                 <Link style={{ textDecoration: 'none', color: "white", fontSize: "18px", fontFamily: 'Raleway' }} to="/shop">Shop</Link>
               </IconButton>
               <IconButton className="aments-nav">
-                <Link style={{ textDecoration: 'none', color: "white", fontSize: "18px", fontFamily: 'Raleway' }} to="/appointment">Dashboard</Link>
+                {user.email && <Link style={{ textDecoration: 'none', color: "white", fontSize: "18px", fontFamily: 'Raleway' }} to="/dashboard">Dashboard</Link>}
               </IconButton>
               <IconButton
                 size="large"
