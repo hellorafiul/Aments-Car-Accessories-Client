@@ -16,6 +16,7 @@ import MainMenu from "./Pages/Shared/Navigation/MainMenu";
 import Services from './Pages/Home/Services/Services';
 import Footer from './Pages/Shared/Footer/Footer';
 import HotDeal from "./Pages/Home/HotDeal/HotDeal";
+import Purchase from './Pages/Purchase/Purchase';
 
 function App() {
   return (
@@ -26,9 +27,15 @@ function App() {
             <PrivateRoute path="/appointment">
               <Appointment />
             </PrivateRoute>
-            <Route path="/shop">
+            <Route exact path="/shop">
               <MainMenu></MainMenu>
               <Services />
+              <HotDeal></HotDeal>
+              <Footer></Footer>
+            </Route>
+            <Route path="/shop/:id">
+              <MainMenu></MainMenu>
+              <Purchase></Purchase>
               <HotDeal></HotDeal>
               <Footer></Footer>
             </Route>

@@ -3,14 +3,18 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { RatingView } from 'react-simple-star-rating'
 
 const Service = (props) => {
-
-  const { name, description, img, price, rating } = props.service;
+  const { name, description, img, price, rating, id } = props.service || {};
+  const history = useHistory()
+  const handleDetails = (key) => {
+    const uri = `/shop/${key}`
+    history.push(uri)
+  }
   return (
     <Grid item xs={4} sm={4} md={4}>
       <Card data-aos="fade-up" data-aos-easing="ease-out-cubic"
@@ -34,7 +38,7 @@ const Service = (props) => {
           <Typography variant="h5" component="div" sx={{ mb: 2 }}>
             <span style={{ color: 'red' }}>$</span>{price}
           </Typography>
-          <Link style={{ textDecoration: 'none' }} to="/shop"><Button sx={{ color: 'red' }} variant="text">Shop Now</Button></Link>
+          <Box style={{ textDecoration: 'none' }} onClick={() => handleDetails(id)}><Button sx={{ color: 'red' }} variant="text">Shop Now</Button></Box>
         </Box>
       </Card>
     </Grid>
