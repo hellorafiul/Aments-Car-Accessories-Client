@@ -33,7 +33,7 @@ const Reviews = () => {
       <Typography>
         Please fill out the form to place a review
         {reviewSuccess && <Alert severity="success">
-          Login Success!
+          Review submitted Successfully!
         </Alert>}
       </Typography>
 

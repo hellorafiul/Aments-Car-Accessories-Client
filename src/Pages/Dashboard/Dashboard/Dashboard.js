@@ -1,4 +1,12 @@
 import * as React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
 import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,10 +23,21 @@ import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import MainMenu from '../../Shared/Navigation/MainMenu';
+import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import PaymentsIcon from '@mui/icons-material/Payments';
-import { Link } from 'react-router-dom';
 import Reviews from './../Reviews/Reviews';
+import MyOrders from './../MyOrders/MyOrders';
+import PayNow from './../PayNow/PayNow';
+import StorefrontIcon from '@mui/icons-material/Storefront';
+import LocalConvenienceStoreIcon from '@mui/icons-material/LocalConvenienceStore';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import AddAProduct from './../AddAProduct/AddAProduct';
+import ManageAllOrders from './../ManageAllOrders/ManageAllOrders';
+import ManageProducts from './../ManageProducts/ManageProducts';
+import MakeAdmin from './MakeAdmin/MakeAdmin';
+
 
 const drawerWidth = 250;
 
@@ -26,6 +45,7 @@ function Dashboard(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
+  let { path, url } = useRouteMatch();
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -35,27 +55,90 @@ function Dashboard(props) {
       <Toolbar />
       <Divider />
       <List>
-        <ListItem button>
-          <ListItemIcon>
-            <PaymentsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Pay Now" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <ShoppingBasketIcon />
-          </ListItemIcon>
-          <ListItemText primary="My Orders" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <ReviewsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Reviews" />
-        </ListItem>
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}`}>
+          <ListItem button>
+            <ListItemIcon>
+              <DashboardCustomizeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+        </Link>
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/myOrders`}>
+          <ListItem button>
+            <ListItemIcon>
+              <ShoppingBasketIcon />
+            </ListItemIcon>
+            <ListItemText primary="My Orders" />
+          </ListItem>
+        </Link>
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/reviews`}>
+          <ListItem button>
+            <ListItemIcon>
+              <ReviewsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Reviews" />
+          </ListItem>
+        </Link>
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/payNow`}>
+          <ListItem button>
+            <ListItemIcon>
+              <PaymentsIcon />
+            </ListItemIcon>
+            <ListItemText primary="Pay Now" />
+          </ListItem>
+        </Link>
+
+        {/* Private admin dashboard */}
+        <Divider />
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/manageAllOrders`}>
+          <ListItem button>
+            <ListItemIcon>
+              <LocalConvenienceStoreIcon />
+            </ListItemIcon>
+            <ListItemText primary="Manage All Orders" />
+          </ListItem>
+        </Link>
+
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/addAProduct`}>
+          <ListItem button>
+            <ListItemIcon>
+              <AddShoppingCartIcon />
+            </ListItemIcon>
+            <ListItemText primary="Add A Product" />
+          </ListItem>
+        </Link>
+
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/manageProducts`}>
+          <ListItem button>
+            <ListItemIcon>
+              <StorefrontIcon />
+            </ListItemIcon>
+            <ListItemText primary="Manage Products" />
+          </ListItem>
+        </Link>
+
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/makeAdmin`}>
+          <ListItem button>
+            <ListItemIcon>
+              <PersonAddIcon />
+            </ListItemIcon>
+            <ListItemText primary="Make Admin" />
+          </ListItem>
+        </Link>
+
+        {/* Dashboard logout */}
+
+        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to='/'>
+          <ListItem button>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
+        </Link>
 
       </List>
-    </div>
+    </div >
   );
 
   const container = window !== undefined ? () => window().document.body : undefined;
@@ -123,10 +206,33 @@ function Dashboard(props) {
         sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
-        <Typography paragraph>
-          <Reviews></Reviews>
-        </Typography>
+        <Switch>
+          <Route exact path={path}>
+            <MyOrders></MyOrders>
+          </Route>
+          <Route path={`${path}/myOrders`}>
+            <MyOrders></MyOrders>
+          </Route>
+          <Route path={`${path}/reviews`}>
+            <Reviews></Reviews>
+          </Route>
+          <Route path={`${path}/payNow`}>
+            <PayNow></PayNow>
+          </Route>
 
+          <Route path={`${path}/manageAllOrders`}>
+            <ManageAllOrders></ManageAllOrders>
+          </Route>
+          <Route path={`${path}/addAProduct`}>
+            <AddAProduct></AddAProduct>
+          </Route>
+          <Route path={`${path}/manageProducts`}>
+            <ManageProducts></ManageProducts>
+          </Route>
+          <Route path={`${path}/makeAdmin`}>
+            <MakeAdmin></MakeAdmin>
+          </Route>
+        </Switch>
       </Box>
     </Box>
   );
