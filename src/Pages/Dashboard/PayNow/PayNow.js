@@ -1,10 +1,13 @@
 import React from 'react';
+import { Box } from '@mui/material';
+import comingSoon from '../../../images/comingSoon.jpg'
+import './PayNow.css'
 
 const PayNow = () => {
   return (
-    <div>
-      <h1>PayNow page is comming soon!</h1>
-    </div>
+    <Box className="pay-now">
+      <img src={comingSoon} alt="" />
+    </Box>
   );
 };
 
