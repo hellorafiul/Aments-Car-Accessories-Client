@@ -6,10 +6,10 @@ import { Container } from '@mui/material/';
 import Service from './../Service/Service';
 
 
-const Services = () => {
+const Services = ({ limit }) => {
   const [services, setServices] = useState([]);
   useEffect(() =>
-    fetch('services.json')
+    fetch(`${process.env.REACT_APP_API}/products?limit=${limit}`)
       .then(res => res.json())
       .then(data => {
         setServices(data)
@@ -27,7 +27,7 @@ const Services = () => {
         <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} style={{ paddingTop: "30px" }}>
           {services.map(service =>
             <Service
-              key={service.id}
+              key={service._id}
               service={service}
             ></Service>
           )}

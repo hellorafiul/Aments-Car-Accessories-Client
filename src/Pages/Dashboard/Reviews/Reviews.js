@@ -31,7 +31,7 @@ const Reviews = () => {
   return (
     <Box>
       <Typography>
-        Please fill out the form to place a review
+        <Typography variant="h3"> Place A Review</Typography>
         {reviewSuccess && <Alert severity="success">
           Review submitted Successfully!
         </Alert>}

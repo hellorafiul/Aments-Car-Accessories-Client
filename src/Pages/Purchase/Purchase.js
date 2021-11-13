@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import './Purchase.css'
-import { Box, Divider, Grid, Typography, Container } from '@mui/material';
+import { Box, Divider, Grid, Typography, Container, Alert } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { RatingView } from 'react-simple-star-rating'
+import useAuth from './../../hooks/useAuth';
 
 const Purchase = () => {
+  const { user } = useAuth();
   const { id } = useParams()
   const [details, setDetails] = useState([])
   const [specificDetail, setSpecificDetail] = useState({})
+  const [confirmOrder, setConfirmOrder] = useState(false)
 
   useEffect(() =>
-    fetch("/services.json")
+    fetch(`${process.env.REACT_APP_API}/products`)
       .then(res => res.json())
       .then(data => {
         setDetails(data)
@@ -21,14 +24,35 @@ const Purchase = () => {
 
   useEffect(() => {
     if (details.length > 0) {
-      const matchedData = details.find(detail => detail.id == id)
-      // delete matchedData.id;
+      const matchedData = details.find(detail => detail._id == id)
+      delete matchedData.id;
       setSpecificDetail(matchedData);
     }
   }, [details]);
 
+
+  // Handle Book now 
+  const handleBookNow = (order) => {
+    fetch(`${process.env.REACT_APP_API}/orders/`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(order)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.acknowledged) {
+          setConfirmOrder(true)
+        }
+      })
+  }
+
   return (
     <Box sx={{ flexGrow: 1, mt: 15, mb: 15 }}>
+      <Typography sx={{ flexGrow: 1, mb: 5, mr: 20, ml: 20 }}>
+        {confirmOrder && <Alert severity="success">
+          Order Completed Successfully!
+        </Alert>}
+      </Typography>
       <Container><Grid container spacing={2}>
         <Grid item xs={12} sm={4} md={4}>
           <Box><img src={specificDetail?.img} alt="" style={{ width: "100%" }} /></Box>
@@ -85,7 +109,7 @@ const Purchase = () => {
                   <input min="1" max="100" value="1" type="number" />
                 </div>
                 <div className="product-add-to-cart-btn">
-                  <button>Order Now</button>
+                  <button onClick={() => handleBookNow({ email: user?.email, status: 'Pending', ...specificDetail })}>Order Now</button>
                 </div>
               </Box>
             </div>

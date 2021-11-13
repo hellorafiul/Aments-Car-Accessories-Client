@@ -9,7 +9,8 @@ import Button from '@mui/material/Button';
 import { RatingView } from 'react-simple-star-rating'
 
 const Service = (props) => {
-  const { name, description, img, price, rating, id } = props.service || {};
+  const { name, description, img, price, rating, _id } = props.service || {};
+  console.log(_id)
   const history = useHistory()
   const handleDetails = (key) => {
     const uri = `/shop/${key}`
@@ -39,7 +40,7 @@ const Service = (props) => {
           <Typography variant="h5" component="div" sx={{ mb: 2 }}>
             <span style={{ color: 'red' }}>$</span>{price}
           </Typography>
-          <Box style={{ textDecoration: 'none' }} onClick={() => handleDetails(id)}><Button sx={{ color: 'red' }} variant="text">View Details</Button></Box>
+          <Box style={{ textDecoration: 'none' }} onClick={() => handleDetails(_id)}><Button sx={{ color: 'red' }} variant="text">View Details</Button></Box>
         </Box>
       </Card>
     </Grid>

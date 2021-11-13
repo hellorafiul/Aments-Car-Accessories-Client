@@ -38,7 +38,6 @@ function App() {
             </PrivateRoute>
             <PrivateRoute path="/dashboard">
               <Dashboard></Dashboard>
-              <Footer></Footer>
             </PrivateRoute>
             <Route path="/home">
               <Home />
