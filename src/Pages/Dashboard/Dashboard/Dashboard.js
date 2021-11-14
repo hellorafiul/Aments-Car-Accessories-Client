@@ -39,6 +39,7 @@ import ManageProducts from './../ManageProducts/ManageProducts';
 import MakeAdmin from './MakeAdmin/MakeAdmin';
 import useAuth from './../../../hooks/useAuth';
 import AdminRoute from './../../Login/AdminRoute/AdminRoute';
+import logo from '../../../images/Aments.png'
 
 
 const drawerWidth = 250;
@@ -157,7 +158,7 @@ function Dashboard(props) {
         sx={{
           width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
-
+          background: '#333333',
         }}
       >
         <Toolbar>
@@ -171,7 +172,7 @@ function Dashboard(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            <Link style={{ color: "white" }} to="/">Aments Shop</Link>
+            <Link to="/"><img src={logo} alt="" /></Link>
           </Typography>
         </Toolbar>
       </AppBar>

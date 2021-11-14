@@ -49,25 +49,15 @@ const ManageAllOrders = () => {
     }
   };
 
-  // Update Status
+  // // Update Status
   // const handleStatus = (id) => {
-  //   const proceed = window.confirm("Are you sure you want to Delete this order?");
-  //   const url = `${process.env.REACT_APP_API}/cancelOrder/${id}`
-  //   if (proceed) {
-  //     fetch(url, {
-  //       method: "DELETE",
-  //       headers: { "content-type": "application/json" }
-  //     })
-  //       .then(res => res.json())
-  //       .then(data => {
-  //         if (data.deletedCount) {
-  //           const remainingServices = allOrders.filter(pd => pd._id !== id);
-  //           setAllAllOrders(remainingServices)
-  //           setIsDelete(true)
-  //         }
-
-  //       }).catch(console.dir)
-  //   }
+  //   // const status = "Shipped"
+  //   fetch(`${process.env.REACT_APP_API}/orders/${id}`, {
+  //     method: 'PUT',
+  //     headers: { "content-type": "application/json" },
+  //     body: JSON.stringify({ status: "shipped" })
+  //   })
+  //     .then(res => res.json())
   // };
 
   return (
