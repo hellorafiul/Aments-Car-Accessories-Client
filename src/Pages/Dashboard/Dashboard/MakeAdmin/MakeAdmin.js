@@ -6,7 +6,7 @@ import useAuth from './../../../../hooks/useAuth';
 const MakeAdmin = () => {
   const { user } = useAuth();
   const [success, setSuccess] = useState(false)
-
+  console.log("this is test")
   const { register, reset, handleSubmit, watch, formState: { errors } } = useForm();
   const onSubmit = data => {
     fetch(`${process.env.REACT_APP_API}/users/admin`, {
