@@ -7,7 +7,7 @@ const MakeAdmin = () => {
   const { user } = useAuth();
   const [success, setSuccess] = useState(false)
 
-  const { register, reset, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, reset, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = data => {
     fetch(`${process.env.REACT_APP_API}/users/admin`, {
       method: "PUT",
