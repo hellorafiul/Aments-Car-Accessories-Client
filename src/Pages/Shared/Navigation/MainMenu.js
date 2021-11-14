@@ -135,12 +135,12 @@ export default function MainMenu() {
       </MenuItem>
       <MenuItem>
         <IconButton>
-          <Link style={{ textDecoration: 'none', color: "black", }} to="/shop">Shop</Link>
+          <Link style={{ textDecoration: 'none', color: "black", fontSize: "18px" }} to="/shop">Shop</Link>
         </IconButton>
       </MenuItem>
       <MenuItem>
         <IconButton>
-          {user.email && <Link style={{ textDecoration: 'none', color: "black", }} to="/dashboard">Dashboard</Link>}
+          {user.email && <Link style={{ textDecoration: 'none', color: "black", fontSize: "18px" }} to="/dashboard">Dashboard</Link>}
         </IconButton>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>

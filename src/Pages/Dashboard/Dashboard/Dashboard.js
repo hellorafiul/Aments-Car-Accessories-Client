@@ -37,11 +37,14 @@ import AddAProduct from './../AddAProduct/AddAProduct';
 import ManageAllOrders from './../ManageAllOrders/ManageAllOrders';
 import ManageProducts from './../ManageProducts/ManageProducts';
 import MakeAdmin from './MakeAdmin/MakeAdmin';
+import useAuth from './../../../hooks/useAuth';
+import AdminRoute from './../../Login/AdminRoute/AdminRoute';
 
 
 const drawerWidth = 250;
 
 function Dashboard(props) {
+  const { admin, logout } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -89,46 +92,49 @@ function Dashboard(props) {
         </Link>
 
         {/* Private admin dashboard */}
-        <Divider />
-        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/manageAllOrders`}>
-          <ListItem button>
-            <ListItemIcon>
-              <LocalConvenienceStoreIcon />
-            </ListItemIcon>
-            <ListItemText primary="Manage All Orders" />
-          </ListItem>
-        </Link>
+        {admin && <Box>
+          <Divider />
+          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/manageAllOrders`}>
+            <ListItem button>
+              <ListItemIcon>
+                <LocalConvenienceStoreIcon />
+              </ListItemIcon>
+              <ListItemText primary="Manage All Orders" />
+            </ListItem>
+          </Link>
 
-        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/addAProduct`}>
-          <ListItem button>
-            <ListItemIcon>
-              <AddShoppingCartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Add A Product" />
-          </ListItem>
-        </Link>
+          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/addAProduct`}>
+            <ListItem button>
+              <ListItemIcon>
+                <AddShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Add A Product" />
+            </ListItem>
+          </Link>
 
-        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/manageProducts`}>
-          <ListItem button>
-            <ListItemIcon>
-              <StorefrontIcon />
-            </ListItemIcon>
-            <ListItemText primary="Manage Products" />
-          </ListItem>
-        </Link>
+          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/manageProducts`}>
+            <ListItem button>
+              <ListItemIcon>
+                <StorefrontIcon />
+              </ListItemIcon>
+              <ListItemText primary="Manage Products" />
+            </ListItem>
+          </Link>
 
-        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/makeAdmin`}>
-          <ListItem button>
-            <ListItemIcon>
-              <PersonAddIcon />
-            </ListItemIcon>
-            <ListItemText primary="Make Admin" />
-          </ListItem>
-        </Link>
+          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/makeAdmin`}>
+            <ListItem button>
+              <ListItemIcon>
+                <PersonAddIcon />
+              </ListItemIcon>
+              <ListItemText primary="Make Admin" />
+            </ListItem>
+          </Link>
+        </Box>
+        }
 
         {/* Dashboard logout */}
 
-        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to='/'>
+        <Link onClick={logout} style={{ display: "flex", textDecoration: "none", color: "#333" }} to='/'>
           <ListItem button>
             <ListItemIcon>
               <ExitToAppIcon />
@@ -220,18 +226,18 @@ function Dashboard(props) {
             <PayNow></PayNow>
           </Route>
 
-          <Route path={`${path}/manageAllOrders`}>
+          <AdminRoute path={`${path}/manageAllOrders`}>
             <ManageAllOrders></ManageAllOrders>
-          </Route>
-          <Route path={`${path}/addAProduct`}>
+          </AdminRoute>
+          <AdminRoute path={`${path}/addAProduct`}>
             <AddAProduct></AddAProduct>
-          </Route>
-          <Route path={`${path}/manageProducts`}>
+          </AdminRoute>
+          <AdminRoute path={`${path}/manageProducts`}>
             <ManageProducts></ManageProducts>
-          </Route>
-          <Route path={`${path}/makeAdmin`}>
+          </AdminRoute>
+          <AdminRoute path={`${path}/makeAdmin`}>
             <MakeAdmin></MakeAdmin>
-          </Route>
+          </AdminRoute>
         </Switch>
       </Box>
     </Box>

@@ -12,10 +12,13 @@ import { RatingView } from 'react-simple-star-rating'
 import { Box } from '@mui/material/';
 import Footer from './../../Shared/Footer/Footer';
 import Typography from '@mui/material/Typography';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Button from '@mui/material/Button';
+import Alert from '@mui/material/Alert';
+import './ManageAllOrders.css'
 
 const ManageAllOrders = () => {
   const [allOrders, setAllAllOrders] = useState([])
+  const [isDelete, setIsDelete] = useState(false)
 
   useEffect(() =>
     fetch(`${process.env.REACT_APP_API}/orders`)
@@ -23,30 +26,82 @@ const ManageAllOrders = () => {
       .then(data => {
         setAllAllOrders(data)
       })
-    , [])
+    , [allOrders])
+
+  // Delete Order
+  const handleDelete = (id) => {
+    const proceed = window.confirm("Are you sure you want to Delete this order?");
+    const url = `${process.env.REACT_APP_API}/cancelOrder/${id}`
+    if (proceed) {
+      fetch(url, {
+        method: "DELETE",
+        headers: { "content-type": "application/json" }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.deletedCount) {
+            const remainingServices = allOrders.filter(pd => pd._id !== id);
+            setAllAllOrders(remainingServices)
+            setIsDelete(true)
+          }
+
+        }).catch(console.dir)
+    }
+  };
+
+  // Update Status
+  // const handleStatus = (id) => {
+  //   const proceed = window.confirm("Are you sure you want to Delete this order?");
+  //   const url = `${process.env.REACT_APP_API}/cancelOrder/${id}`
+  //   if (proceed) {
+  //     fetch(url, {
+  //       method: "DELETE",
+  //       headers: { "content-type": "application/json" }
+  //     })
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         if (data.deletedCount) {
+  //           const remainingServices = allOrders.filter(pd => pd._id !== id);
+  //           setAllAllOrders(remainingServices)
+  //           setIsDelete(true)
+  //         }
+
+  //       }).catch(console.dir)
+  //   }
+  // };
+
   return (
     <Box>
       <Typography variant="h2" sx={{ mb: 10, }}> Manage orders</Typography>
+      <Typography sx={{ flexGrow: 1, mb: 5, mr: 20, ml: 20 }}>
+        {isDelete && <Alert severity="success">
+          Order Successfully Removed!
+        </Alert>}
+      </Typography>
       <Box className="manage-products">
-        <TableContainer component={Paper} className="manage-products">
+        <TableContainer component={Paper} className="manageOrder">
           <Table size="small" aria-label="a dense table">
             <TableHead>
               <TableRow>
+                <TableCell>#</TableCell>
                 <TableCell>Image</TableCell>
                 <TableCell >Name</TableCell>
                 <TableCell>Price</TableCell>
                 <TableCell>Ratting</TableCell>
                 <TableCell>Status</TableCell>
-                <TableCell>Update Status</TableCell>
                 <TableCell>Action</TableCell>
+                <TableCell>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {allOrders.map((row) => (
+              {allOrders.map((row, index) => (
                 <TableRow
                   key={row?._id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
+                  <TableCell>
+                    {index}
+                  </TableCell>
                   <TableCell className="table-img" component="th" scope="row" >
                     <img src={row?.img} alt="" sx={{ width: "50px" }} />
                   </TableCell>
@@ -54,10 +109,10 @@ const ManageAllOrders = () => {
                   <TableCell >${row?.price}</TableCell>
                   <TableCell ><RatingView ratingValue={row.rating} /* RatingView Props */ /></TableCell>
                   <TableCell >{row?.status}</TableCell>
-                  <TableCell><IconButton aria-label="delete" disabled color="primary">
-                    <CheckCircleOutlineIcon sx={{ color: "green", cursor: "pointer" }} />
-                  </IconButton></TableCell>
-                  <TableCell><IconButton aria-label="delete" disabled color="primary">
+                  <TableCell>
+                    <Button size="small" sx={{ textTransform: 'none' }}>Mark as Shipped</Button>
+                  </TableCell>
+                  <TableCell><IconButton onClick={() => handleDelete(row._id)} aria-label="delete" color="error">
                     <DeleteIcon />
                   </IconButton></TableCell>
                 </TableRow>

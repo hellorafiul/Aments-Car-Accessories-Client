@@ -109,7 +109,15 @@ const Purchase = () => {
                   <input min="1" max="100" value="1" type="number" />
                 </div>
                 <div className="product-add-to-cart-btn">
-                  <button onClick={() => handleBookNow({ email: user?.email, status: 'Pending', ...specificDetail })}>Order Now</button>
+                  <button onClick={() => handleBookNow({
+                    email: user?.email,
+                    status: 'Pending',
+                    name: specificDetail?.name,
+                    price: specificDetail?.price,
+                    description: specificDetail?.description,
+                    rating: specificDetail?.rating,
+                    img: specificDetail?.img
+                  })}>Order Now</button>
                 </div>
               </Box>
             </div>
