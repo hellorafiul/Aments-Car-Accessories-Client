@@ -59,41 +59,40 @@ function Dashboard(props) {
       <Toolbar />
       <Divider />
       <List>
-        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}`}>
-          <ListItem button>
-            <ListItemIcon>
-              <DashboardCustomizeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-        </Link>
-        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/myOrders`}>
-          <ListItem button>
-            <ListItemIcon>
-              <ShoppingBasketIcon />
-            </ListItemIcon>
-            <ListItemText primary="My Orders" />
-          </ListItem>
-        </Link>
-        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/reviews`}>
-          <ListItem button>
-            <ListItemIcon>
-              <ReviewsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Reviews" />
-          </ListItem>
-        </Link>
-        <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/payNow`}>
-          <ListItem button>
-            <ListItemIcon>
-              <PaymentsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Pay Now" />
-          </ListItem>
-        </Link>
-
-        {/* Private admin dashboard */}
-        {admin && <Box>
+        {!admin ? <Box>
+          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}`}>
+            <ListItem button>
+              <ListItemIcon>
+                <DashboardCustomizeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </ListItem>
+          </Link>
+          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/myOrders`}>
+            <ListItem button>
+              <ListItemIcon>
+                <ShoppingBasketIcon />
+              </ListItemIcon>
+              <ListItemText primary="My Orders" />
+            </ListItem>
+          </Link>
+          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/reviews`}>
+            <ListItem button>
+              <ListItemIcon>
+                <ReviewsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Reviews" />
+            </ListItem>
+          </Link>
+          <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/payNow`}>
+            <ListItem button>
+              <ListItemIcon>
+                <PaymentsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Pay Now" />
+            </ListItem>
+          </Link>
+        </Box> : <Box>
           <Divider />
           <Link style={{ display: "flex", textDecoration: "none", color: "#333" }} to={`${url}/manageAllOrders`}>
             <ListItem button>
