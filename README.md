@@ -4,10 +4,8 @@ ABOUT [Aments](https://aments-9b6e4.web.app/)
 
 We Are World Best Quality Car Parts Shop
 
-* Professional Auto Parts manufacturer
-* Affordable Price
-* High-quality products
+* A responsive, fully-functional niche website
+* Allowing customers to create account, browse products, buy products & write reviews.
+* Admins have the ability to add new products, remove existing products, remove user products, update shipping status, and create new admin accounts.
 * Professional management team
-* Honors and awards
-* 24/7 online customer support
-* Consumer-friendly Product Warranty
+* Reviews are dynamic.
