@@ -9,3 +9,4 @@ We Are World Best Quality Car Parts Shop
 * Admins have the ability to add new products, remove existing products, remove user products, update shipping status, and create new admin accounts.
 * Professional management team
 * Reviews are dynamic.
+* Technology: MUI, JS, Aos, React, React router, Heroku, Firebase, Node JS, Node Express, MongoDB 
